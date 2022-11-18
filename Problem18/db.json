@@ -1,0 +1,28 @@
+{
+  "people": [
+    {
+      "name": {
+        "firstname": "Michael",
+        "lastname": "Landon"
+      },
+      "phone": "456-456-456",
+      "id": "1"
+    },
+    {
+      "name": {
+        "firstname": "Aby",
+        "lastname": "Diaz"
+      },
+      "phone": "456-654-456",
+      "id": "2"
+    },
+    {
+      "name": {
+        "firstname": "Jess",
+        "lastname": "Saver"
+      },
+      "phone": "123-456-789",
+      "id": "2022-11-17T00:16:08.725Z"
+    }
+  ]
+}
