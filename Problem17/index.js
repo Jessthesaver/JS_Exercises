@@ -9,6 +9,7 @@ let candidate = {
     }
 }
 
-let div = document.getElementsByClassName('info')[1];
-div.childNodes[1].innerText = candidate.name.firstname;
-div.childNodes[3].innerText = candidate.printName();
+let div = document.querySelector('#body').querySelector('.info');
+let [div1,div2] = div.children
+div1.textContent = candidate.name.firstname;
+div2.textContent = candidate.printName();
