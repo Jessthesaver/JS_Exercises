@@ -1,25 +1,18 @@
 const div= document.querySelector('div');
+const togglers= document.querySelectorAll('.toggler')
+let ps=[]
+togglers.forEach(element=>{
+    element.nextElementSibling.style.visibility='hidden'
+})
 
-div.addEventListener('click',(event)=>{
-    let element= event.target;
-    let listofelements=div.children;
-    if(element.tagName=='P'){
-        if(Array.from(element.classList).includes('on')){
-            element.classList.remove('on');
-            Array.from(listofelements).forEach(el=>{
-                el.style.visibility='visible';
-            });
+togglers.forEach(element=>{
+    element.addEventListener('click',(event)=>{
+        let target= event.target;
+        let sibbling = target.nextElementSibling;
+        if(sibbling.style.visibility==='visible'){
+            sibbling.style.visibility='hidden';
         }else{
-            element.classList.add('on');
-            Array.from(listofelements).forEach(el=>{
-                if(Array.from(el.classList).includes('on')){
-                    el.style.visibility='visible';
-                }else{
-                    el.style.visibility='hidden';
-                }
-            })
+            sibbling.style.visibility='visible';
         }
-        
-    }
-    
+    });
 });
