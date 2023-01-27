@@ -1,29 +1,14 @@
 function tableSort(){
     let table= document.getElementById('maintable');
-    let switching=true;
-    let switchable;
-    let firstrow;
-    let seconndrow;
-    let rows;
-    let i;
-
-    while(switching){
-        switching=false;
-        rows = table.rows;
-        for(i=1; i<(rows.length-1); i++){
-            switchable= false;
-            firstrow= rows[i].querySelector('.age');
-            seconndrow= rows[i+1].querySelector('.age');
-            if(firstrow.innerHTML > seconndrow.innerHTML){
-                switchable= true;
-                break;
-            }
-        }
-        if(switchable){
-            rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
-            switching=true;
-        }
-    }
+    let [,...mrows]=Array.from(table.querySelectorAll('tr'));
+    mrows.sort((a, b) => {
+        const aText = a.querySelector(`.age`).textContent;
+        const bText = b.querySelector(`.age`).textContent;
+        return aText-bText
+    })
+    mrows.forEach(row=>{
+        table.appendChild(row)
+    })
 }
 
 let btn= document.getElementById('button');
