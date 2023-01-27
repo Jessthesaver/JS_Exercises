@@ -9,11 +9,10 @@ String.prototype.reverse = function(){
 String.prototype.reverseWords = function(){
     let regex=/([a-zA-Z]+)/gm;
     let matches=this.match(regex);
+    console.log(matches)
     let str='';
     matches.forEach(element => {
-        for(let i =element.length-1; i>=0;i--){
-            str += element[i];
-        }
+        str+=element.reverse()
         str +=' ';   
     });
     return str;

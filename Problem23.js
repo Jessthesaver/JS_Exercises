@@ -1,17 +1,31 @@
-function rndnmgen(){//random number generator for numbers between 0 and 200
-    const rndNum = () => parseInt((Date.now() * Math.random())/10000000000);
-    console.log(rndNum())
+class CustomRandom {
+  constructor(min, max) {
+      this.limit = max - min + 1;
+      this.max = max;
+      this.min = min;
+      this.a = 11;
+      this.c = 17;
+      this.m = 25
+      this.seed = Math.floor(Math.random() * this.m);
+  }
+
+  *generator() {
+      for (let i = 0; i < this.m; i++) {
+          this.seed = (this.a * this.seed + this.c) % this.m;
+
+          if (this.seed < this.limit) {
+              yield this.seed + this.min
+          }
+      }
+
+  }
 }
 
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
-rndnmgen();
+const customRand = new CustomRandom(0, 10);
+const generator = customRand.generator();
+let output = generator.next();
+
+while (!output.done) {
+  console.log(output.value);
+  output = generator.next();
+}

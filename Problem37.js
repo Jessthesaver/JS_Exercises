@@ -6,13 +6,10 @@ let test= 'potato';
 
 console.log('aby'.exclamation());
 
-function add(...nums){
-    let result=0;
-    console.log(nums)
-    for(let i=0;i<nums.length;i++){
-        result=result+nums[i];
-    }
-    return result;
+const add =(...nums)=>{
+    return nums.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
 }
-
+ 
 console.log(add(4,5,7,8))

@@ -1,9 +1,6 @@
 Array.prototype.duplicate = function(){
     let copyarr=this;
-    let length=this.length;
-    for(let i =0 ; i < length ; i++){
-        copyarr.push(this[i]);
-    }
+    copyarr=copyarr.concat(copyarr)
     return copyarr;
 };
 

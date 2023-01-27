@@ -7,13 +7,8 @@ class Person{
         return this.name+' '+this.lastname;
     }
     async ajaxGet(link){
-        const response = fetch(link)
-        if (!response.ok) {
-            console.log(response.status, response.statusText);
-        };
-        const data = await response.json();
-        console.log(data)
-        return data;
+        return fetch(link)
+       
     }
 }
 
@@ -28,6 +23,17 @@ class Medic extends Person{
 }
 
 let aby=new Medic('Aby', 'Diaz','Ginecologist')
-let jesus;
-//console.log(aby);
-let listofdata = aby.ajaxGet('https://jsonplaceholder.typicode.com/users')
+let jesus=new Person('Jesus','Carmona')
+let listofdata = aby.ajaxGet('https://jsonplaceholder.typicode.com/users').then((res)=>{
+    if(res.ok){
+        console.log('Succesful request')
+        return res
+    }
+    else{
+        throw new Error('Unsuccesful request')
+    }
+}).then(res=>res.json())
+    .then(data=> console.log(data))
+    .catch(error=> {
+        throw new Error(error)
+    })

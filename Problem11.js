@@ -12,24 +12,17 @@ const objecttwo={
     fedelobo:true
 }
 
-function checkProperties(obj) {
-    for (let key in obj) {
-        if (obj[key] !== null && obj[key] != "")
-            return false;
-    }
-    return true;
-}
-
 function objectChecker(obja,objb){
-    let sameprops=[];
-    for(let keya in obja){
-        for(let keyb in objb){
-            if(keya==keyb && obja[keya]!=objb[keyb]){
-                sameprops.push(keya);
-            }
+    const keysa =Object.keys(obja);
+    const keysb =Object.keys(objb);
+    const intersection = keysa.filter(element => keysb.includes(element));
+    let diff = []
+    intersection.forEach(element =>{
+        if(obja[element]!==objb[element]){
+            diff.push(element)
         }
-    }
-    return sameprops;
+    })
+    return diff;
 }
 
 console.log(objectChecker(objectone,objecttwo));

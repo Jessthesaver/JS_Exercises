@@ -13,7 +13,9 @@ function test(arra,arrb){
                 throw new Error(`Strings aren't the same`)
             }
         }   
+        return true
+    }else{
+        throw new Error('Strings have different length')
     }
-    return true
 }
 console.log(check(str,pttr))

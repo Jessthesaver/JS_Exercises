@@ -6,7 +6,7 @@ function removefromarray(arr,value){
             return arr;
         }
     }
-    throw new Error(`The element isn't in the array`)
+    return `The element isn't in the array`
 }
 const testarr=[1,2,3,4,5,6];
 const testval=4;
