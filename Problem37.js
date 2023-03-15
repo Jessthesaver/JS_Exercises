@@ -1,15 +1,16 @@
-String.prototype.exclamation= function(){
-    return `${this}!`;
-}
+String.prototype.exclamation = function () {
+  return `${this}!`;
+};
 
-let test= 'potato';
+let test = "potato";
 
-console.log('aby'.exclamation());
+console.log("aby".exclamation());
 
-const add =(...nums)=>{
-    return nums.reduce(
-    (accumulator, currentValue) => accumulator + currentValue
+const add = (...nums) => {
+  return nums.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
   );
-}
- 
-console.log(add(4,5,7,8))
+};
+
+console.log(add(4, 5, 7, 8));
