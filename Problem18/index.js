@@ -63,10 +63,11 @@ function editEnabler(cell) {
     let editable = row.querySelectorAll("input");
     editable.forEach((element) => {
       if (element.readOnly === true) {
-        element.readOnly = false; //makes the row editable
-        element.style.ba;
+        element.readOnly = false; //makes the row editable and changes the bg color of the boxes when they are editable
+        element.style.backgroundColor = "beige";
       } else {
-        element.readOnly = true; //makes the row uneditable
+        element.readOnly = true;
+        element.style.backgroundColor = "white"; //makes the row uneditable
       }
     });
   });
@@ -140,13 +141,15 @@ function uploadACandidate(url, candidate) {
         console.log("Candidate succesfully posted!");
         alert("Candidate succesfully posted!");
       } else {
-        console.error("POST request failed");
         alert("POST request failed");
+        throw new Error("POST request failed");
       }
       return res;
     })
     .then((res) => res.json())
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 //PUT
 function putAcandidate(url, candidate) {
@@ -162,13 +165,15 @@ function putAcandidate(url, candidate) {
         console.log("Candidate succesfully edited!");
         alert("Candidate succesfully edited!");
       } else {
-        console.error("PUT request failed");
         alert("PUT request failed");
+        throw new Error("PUT request failed");
       }
       return res;
     })
     .then((res) => res.json())
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 //DELETE
 function deleteAcandidate(url, id) {
@@ -179,8 +184,8 @@ function deleteAcandidate(url, id) {
       console.log("Candidate deleted succesfully!");
       alert("Candidate deleted succesfully!");
     } else {
-      console.error("DELETE request failed");
       alert("DELETE request failed");
+      throw new Error("DELETE request failed");
     }
     return res;
   });
