@@ -1,5 +1,5 @@
 const str = "potato";
-const pttr = "po";
+const pttr = "pot";
 
 function check(str, pattern) {
   let success = [];
@@ -10,16 +10,12 @@ function check(str, pattern) {
   for (let letter = 0; letter < splitStr.length; letter++) {
     for (let element = 0; element < splitPattern.length; element++) {
       if (splitPattern[element] === "*" && letter === element) {
-        success.push(splitStr[element]);
+        success.push(splitPattern[element]);
       } else {
-        if (
-          splitPattern[element].charAt() === splitStr[letter].charAt() &&
-          letter === element
-        ) {
+        if (splitPattern[element].charAt() === splitStr[letter].charAt()) {
           success.push(splitStr[element]);
         } else if (
-          splitPattern[element].charAt() !== splitStr[letter].charAt() &&
-          letter === element
+          splitPattern[element].charAt() !== splitStr[letter].charAt()
         ) {
           failure.push(splitStr[element]);
         }
@@ -28,7 +24,10 @@ function check(str, pattern) {
   }
   success = success.join("");
 
-  if (success && failure.length === 0 && str.length >= pattern.length) {
+  if (success.length === pattern.length) {
+    return success;
+  }
+  if (success && failure.length === 0) {
     return success;
   } else if (failure.length !== 0 || failure.length === 0) {
     return pattern;
@@ -39,9 +38,11 @@ function check(str, pattern) {
 
 function test(stra, strb) {
   if (strb.includes("*")) {
-    check(stra, strb);
+    return check(stra, strb);
   } else {
-    return stra.includes(strb);
+    if (stra.includes(strb)) {
+      return strb;
+    }
   }
 }
 console.log(test(str, pttr));
