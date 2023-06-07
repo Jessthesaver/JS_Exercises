@@ -3,49 +3,36 @@ const pttr = "a*";
 
 function check(str, pattern) {
   let success = [];
-  let failure = false;
   let splitStr = [...str];
   let splitPattern = [...pattern];
 
   for (let letter = 0; letter < splitStr.length; letter++) {
+    let match = true;
     for (let element = 0; element < splitPattern.length; element++) {
-      if (failure === true) {
-        break;
-      }
-      if (
-        (splitPattern[element] === "*" &&
-          splitStr[letter + element] &&
-          letter === element) ||
-        splitPattern[element] === splitStr[letter + element]
-      ) {
-        success.push(splitStr[letter + element]);
-      } else if (splitPattern[element].charAt() !== splitStr[letter].charAt()) {
-        failure = true;
-      }
+      match =
+        match &&
+        (splitPattern[element] === "*" ||
+          splitPattern[element] === splitStr[letter + element]);
+      if (!match) break;
+
+      if (match) success.push(splitStr[letter + element]);
+    }
+
+    if (success.length === pattern.length) {
+      return success.join("");
     }
   }
-
-  success = success.join("");
-
-  if (success.length === pattern.length) {
-    return success;
-  } else if (failure) {
-    return false;
-  }
-
-  return { success, failure };
+  return null;
 }
 
-function test(stra, strb) {
-  if (strb.length > stra.length) {
-    return false;
-  }
-  if (strb.includes("*")) {
-    return check(stra, strb);
+function test(str, pattern) {
+  if (typeof str !== "string" || typeof pattern !== "string") {
+    throw new Error(`Invalid input. Inputs must be a string`);
+  } else if (str === null || str.trim() === "" || pattern.length > str.length) {
+    return null;
   } else {
-    if (stra.includes(strb)) {
-      return strb;
-    }
+    return check(str, pattern);
   }
 }
+
 console.log(test(str, pttr));
