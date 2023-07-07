@@ -18,8 +18,10 @@ function check(str, pattern) {
       if (match) success.push(splitStr[letter + element]);
     }
 
-    if (success.length === pattern.length) {
+    if (match && success.length > pattern.length) {
       return success.join("");
+    } else {
+      success.slice(letter, pattern.length + letter).join("");
     }
   }
   return null;
