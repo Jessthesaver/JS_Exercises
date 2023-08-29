@@ -2,39 +2,29 @@ const str = "potato";
 const pttr = "a*";
 
 function check(str, pattern) {
-  let success = [];
-  let splitStr = [...str];
-  let splitPattern = [...pattern];
-
-  for (let letter = 0; letter < splitStr.length; letter++) {
-    let match = true;
-    for (let element = 0; element < splitPattern.length; element++) {
-      match =
-        match &&
-        (splitPattern[element] === "*" ||
-          splitPattern[element] === splitStr[letter + element]);
-      if (!match) break;
-
-      if (match) success.push(splitStr[letter + element]);
+  const n = pattern.length;
+  for (let i = 0; i < n; i++) {
+    let strLetter = str[i];
+    let patternLetter = pattern[i];
+    if (patternLetter === "*") {
+      continue;
     }
-
-    if (match && success.length > pattern.length) {
-      return success.join("");
-    } else {
-      success.slice(letter, pattern.length + letter).join("");
+    if (patternLetter !== strLetter) {
+      return false;
     }
   }
-  return null;
+
+  return true;
 }
 
 function test(str, pattern) {
-  if (typeof str !== "string" || typeof pattern !== "string") {
-    throw new Error(`Invalid input. Inputs must be a string`);
-  } else if (str === null || str.trim() === "" || pattern.length > str.length) {
-    return null;
-  } else {
-    return check(str, pattern);
+  for (let i = 0; i < str.length - pattern.length + 1; i++) {
+    const subString = str.slice(i, i + pattern.length);
+    if (check(subString, pattern)) {
+      return true;
+    }
   }
+  return false;
 }
 
 console.log(test(str, pttr));
